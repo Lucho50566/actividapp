@@ -1,0 +1,23 @@
+# deps / builds
+node_modules/
+dist/
+dev-dist/
+
+# secretos y datos locales (NO subir)
+.env
+.env.local
+.env.*.local
+server/.env
+server/data/
+*.bak
+
+# logs y temporales
+*.log
+_shot*.png
+test-activity.png
+_shots/
+
+# binarios / ruido
+cloudflared.exe
+.DS_Store
+Thumbs.db

@@ -1,0 +1,9 @@
+node_modules
+web/dist
+.git
+.gitignore
+_shots
+*.log
+*.png
+**/.env
+server/data/settings.json

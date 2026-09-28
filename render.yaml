@@ -1,0 +1,13 @@
+# Blueprint de Render: https://render.com/docs/blueprint-spec
+# Deploy "siempre online" de Actividapp (no depende de tu PC).
+services:
+  - type: web
+    name: actividapp
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: free            # plan gratuito (se duerme sin uso). Cambiá a "starter" para siempre activo.
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: AI_PROVIDER
+        value: gemini

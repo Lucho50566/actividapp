@@ -1,0 +1,21 @@
+{
+  "name": "actividapp",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Actividapp - convierte capturas de actividades en interfaces interactivas resolubles",
+  "workspaces": ["shared", "server", "web"],
+  "scripts": {
+    "setup": "npm install",
+    "dev": "concurrently -n web,server -c cyan,green \"npm:dev:web\" \"npm:dev:server\"",
+    "dev:web": "npm run -w web dev",
+    "dev:server": "npm run -w server dev",
+    "build": "npm run -w web build",
+    "start": "npm run -w server start",
+    "lint": "npm run -w web lint",
+    "typecheck": "npm run -w shared typecheck && npm run -w server typecheck && npm run -w web typecheck"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  },
+  "engines": { "node": ">=20" }
+}

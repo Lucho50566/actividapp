@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light dark;
+  /* Paleta de acento por defecto (violeta). prefs.ts la sobrescribe. */
+  --brand-50: 245 243 255;
+  --brand-200: 221 214 254;
+  --brand-500: 139 92 246;
+  --brand-600: 124 58 237;
+  --brand-700: 109 40 217;
+}
+html, body, #root { min-height: 100%; }
+#root { min-height: 100dvh; }
+html { font-size: 16px; }
+html[data-fs="large"] { font-size: 18px; }
+
+body {
+  @apply bg-slate-50 text-slate-900 antialiased;
+  margin: 0;
+  overscroll-behavior-y: none;
+  background-image: radial-gradient(900px 460px at 50% -12%, rgb(var(--brand-500) / 0.13), transparent 62%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+.dark body {
+  @apply bg-slate-950 text-slate-100;
+  background-image: radial-gradient(900px 460px at 50% -12%, rgb(var(--brand-600) / 0.30), transparent 62%);
+}
+
+/* Animaciones: se apagan por preferencia del sistema o del usuario */
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+html.no-anim *, html.no-anim *::before, html.no-anim *::after { animation: none !important; transition: none !important; }
+
+.tap { @apply active:scale-95 transition-transform; }
+
+/* Accesibilidad: anillo de foco visible SOLO para teclado (no en click/touch) */
+:focus-visible { outline: 2px solid rgb(var(--brand-600)); outline-offset: 2px; border-radius: 6px; }
+:focus:not(:focus-visible) { outline: none; }
+::selection { background: rgb(var(--brand-200)); color: rgb(15 23 42); }
+
+/* Skeletons con shimmer (se degradan a bloque gris con reduced-motion/no-anim) */
+.skeleton { @apply relative overflow-hidden rounded bg-slate-200/70 dark:bg-slate-800/70; }
+.skeleton::after {
+  content: ''; position: absolute; inset: 0; transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.45), transparent);
+  animation: shimmer 1.4s infinite;
+}
+.dark .skeleton::after { background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.06), transparent); }
+@keyframes shimmer { 100% { transform: translateX(100%); } }
+
+/* Inputs de respuesta con estética "escrito a mano/subrayado" */
+.answer-input {
+  @apply w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-[17px] outline-none
+         focus:border-brand focus:ring-2 focus:ring-brand/30
+         dark:border-slate-700 dark:bg-slate-900;
+}
